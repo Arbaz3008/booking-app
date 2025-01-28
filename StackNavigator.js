@@ -15,6 +15,7 @@ import { ModalPortal } from "react-native-modals";
 import Search from "./screens/Search";
 import Places from "./screens/Places";
 import Map from "./screens/Map";
+import PropertyInfo from "./screens/PropertyInfo";
 
 
 const StackNavigator = () => {
@@ -100,7 +101,8 @@ const StackNavigator = () => {
         <Stack.Screen name="Main" component={BottomTab}  options={{headerShown:false}} />
         <Stack.Screen name="search" component={Search} options={{headerShown:false}} />
         <Stack.Screen name="places" component={Places}  />
-        <Stack.Screen name="map" component={Map}  />
+        <Stack.Screen name="map" component={Map}  options={{headerShown:false}} />
+        <Stack.Screen name="info" component={PropertyInfo}  options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
     <ModalPortal />

@@ -9,6 +9,7 @@ import {
 import React from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
 
 const PropertyCard = ({
   rooms,
@@ -21,9 +22,22 @@ const PropertyCard = ({
   
 }) => {
   const { width, height } = Dimensions.get("window");
+  const navigation = useNavigation();
   return (
     <View>
       <Pressable
+      onPress={()=>navigation.navigate('info',{
+        name:property.name,
+        rating:property.rating,
+        oldPrice:property.oldPrice,
+        newPrice:property.newPrice,
+        photos:property.photos,
+        availableRooms:property.rooms,
+        adults:adults,
+        children:children,
+        rooms:rooms,
+        dates:dates,
+      })}
         style={{ margin: 12, flexDirection: "row", backgroundColor: "white" }}
       >
         <View>

@@ -8,6 +8,7 @@ import PropertyCard from "../components/PropertyCard";
 import { BottomModal, ModalContent, ModalFooter ,ModalTitle , SlideAnimation} from "react-native-modals";
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import SearchResults from "../components/SearchResults";
 
 const Places = () => {
   const route = useRoute();
@@ -578,6 +579,9 @@ return 0;
           </Text>
         </Pressable>
         <Pressable
+        onPress={()=>navigation.navigate('map',{
+          SearchResults:searchPlaces,
+        })}
           style={{
             flexDirection: "row",
             alignItems: "center",
