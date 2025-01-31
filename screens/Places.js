@@ -8,7 +8,7 @@ import PropertyCard from "../components/PropertyCard";
 import { BottomModal, ModalContent, ModalFooter ,ModalTitle , SlideAnimation} from "react-native-modals";
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import SearchResults from "../components/SearchResults";
+
 
 const Places = () => {
   const route = useRoute();
@@ -603,7 +603,7 @@ return 0;
                 rooms={route.params.rooms}
                 children={route.params.children}
                 adults={route.params.adults}
-                dates={route.params.dates}
+                selectedDates={route.params.selectedDates}
                 property={property}
                 availableRooms={property.rooms}
               />

@@ -15,7 +15,7 @@ const PropertyCard = ({
   rooms,
   children,
   property,
-  dates,
+  selectedDates,
   adults,
   availableRooms,
   properties,
@@ -36,7 +36,7 @@ const PropertyCard = ({
         adults:adults,
         children:children,
         rooms:rooms,
-        dates:dates,
+        selectedDates:selectedDates,
       })}
         style={{ margin: 12, flexDirection: "row", backgroundColor: "white" }}
       >

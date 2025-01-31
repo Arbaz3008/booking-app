@@ -16,6 +16,9 @@ import Search from "./screens/Search";
 import Places from "./screens/Places";
 import Map from "./screens/Map";
 import PropertyInfo from "./screens/PropertyInfo";
+import Rooms from "./screens/Rooms";
+import UserScreen from "./screens/UserScreen";
+import Confirm from "./screens/Confirm";
 
 
 const StackNavigator = () => {
@@ -103,6 +106,9 @@ const StackNavigator = () => {
         <Stack.Screen name="places" component={Places}  />
         <Stack.Screen name="map" component={Map}  options={{headerShown:false}} />
         <Stack.Screen name="info" component={PropertyInfo}  options={{headerShown:false}} />
+        <Stack.Screen name="Rooms" component={Rooms}  />
+        <Stack.Screen name="User" component={UserScreen} options={{headerShown:false}}  />
+        <Stack.Screen name="confirm" component={Confirm}  />
       </Stack.Navigator>
     </NavigationContainer>
     <ModalPortal />

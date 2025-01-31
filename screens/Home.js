@@ -29,7 +29,7 @@ import {
 
 const Home = () => {
   const navigation = useNavigation();
-  const [dates, setDates] = useState([]);
+  const [selectedDates, setSelectedDates] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [rooms, setRooms] = useState(0);
   const [adults, setAdults] = useState(0);
@@ -64,7 +64,7 @@ const Home = () => {
   }, []);
   console.log(route.params)
   const searchPlaces =(place)=>{
-    if(!route.params || !dates){
+    if(!route.params || !selectedDates){
       Alert.alert('Invalid Details', 'please enter all details', [
         {
           text: 'Cancel',
@@ -74,12 +74,12 @@ const Home = () => {
         {text: 'OK', onPress: () => console.log('OK Pressed')},
       ]);
     }
-    if(route.params && dates){
+    if(route.params && selectedDates){
       navigation.navigate('places',{
         rooms:rooms,
         adults:adults,
         children:children,
-        dates:dates,
+        selectedDates:selectedDates,
         place:place
       })
     }
@@ -97,6 +97,7 @@ const Home = () => {
 
               <Feather name="search" size={24} color="black" />
               <TextInput
+              onPress={()=>navigation.navigate('search')}
                 placeholder={route?.params ? route.params.input  : "Enter Your Destination"}
                 style={styles.input}
                 placeholderTextColor="#888"
@@ -122,9 +123,12 @@ const Home = () => {
                 allowFontScaling={false}
                 placeholder="Select Your  Dates"
                 mode="range"
-                onConfirm={(range) => {
-                  setDates(`${range.startDate} - ${range.endDate}`);
-                }}
+    
+                onConfirm={(startDate, endDate) =>
+                  setSelectedDates(startDate, endDate)
+                }
+                  
+               
                 customButton={(onConfirm) => (
                   <TouchableOpacity
                     style={styles.submitButton}
