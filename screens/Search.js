@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
 import React ,{useEffect, useState} from "react";
 import { Feather } from "@expo/vector-icons";
 import SearchResults from "../components/SearchResults";
-//import { collection, getDocs } from "firebase/firestore";
-//import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 const SearchScreen = () => {
     const [input,setInput] = useState("");
@@ -471,7 +471,7 @@ const SearchScreen = () => {
       ];
       const [items,setItems] = useState([]);
     
-    {/*useEffect(() => {
+    useEffect(() => {
       if(items.length > 0) return;
 
       const fetchProducts = async () => {
@@ -485,7 +485,7 @@ const SearchScreen = () => {
 
       fetchProducts();
     },[items]);
-  console.log(items);*/}
+  console.log(items);
   return (
     <SafeAreaView>
       <View

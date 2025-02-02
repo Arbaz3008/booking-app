@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState,useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Octicons from "@expo/vector-icons/Octicons";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -8,6 +8,8 @@ import PropertyCard from "../components/PropertyCard";
 import { BottomModal, ModalContent, ModalFooter ,ModalTitle , SlideAnimation} from "react-native-modals";
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 
 const Places = () => {
@@ -20,7 +22,7 @@ const Places = () => {
       place: "Bangalore",
       placeImage:
         "https://images.pexels.com/photos/7630190/pexels-photo-7630190.jpeg?auto=compress&cs=tinysrgb&w=800",
-      shortDescription: "City in Karnataka, India",
+      shortDescription: "City Lahore, pakistan",
       properties: [
         {
           id: "10",
@@ -496,6 +498,7 @@ const Places = () => {
       },
     });
   }, []);
+
   const filters = [
     {
       id: "0",
@@ -506,6 +509,23 @@ const Places = () => {
       filter: "cost:High to Low",
     },
   ];
+  const [loading,setLoading] = useState(false);
+  const [items,setItems] = useState([]);
+  useEffect(() => {
+    if (items.length > 0) return;
+
+    setLoading(true);
+
+    const fetchProducts = async () => {
+      const colRef = collection(db,"places");
+      const docsSnap = await getDocs(colRef);
+      docsSnap.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setLoading(false);
+    };
+    fetchProducts();
+  }, [items]);
   const searchPlaces =data?.filter((item)=>item.place=== route.params.place);
   const [sortedData ,setSortedData] =useState(data)
   console.log(searchPlaces)
@@ -593,6 +613,28 @@ return 0;
           </Text>
         </Pressable>
       </Pressable>
+      {loading ? (
+        <Text>Fetching places....</Text>
+      ) : (
+        <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
+        {sortedData
+          ?.filter((item) => item.place === route.params.place)
+          .map((item) =>
+            item.properties.map((property, index) => (
+              <PropertyCard
+                key={index}
+                rooms={route.params.rooms}
+                children={route.params.children}
+                adults={route.params.adults}
+                selectedDates={route.params.selectedDates}
+                property={property}
+                availableRooms={property.rooms}
+              />
+            ))
+          )}
+      </ScrollView>
+      )}
+
       <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
         {sortedData
           ?.filter((item) => item.place === route.params.place)
@@ -610,6 +652,7 @@ return 0;
             ))
           )}
       </ScrollView>
+
       <BottomModal
         onBackdropPress={() => setModalVisibile(!modalVisibile)}
         swipeDirection={["up", "down"]}

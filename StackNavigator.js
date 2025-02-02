@@ -19,6 +19,8 @@ import PropertyInfo from "./screens/PropertyInfo";
 import Rooms from "./screens/Rooms";
 import UserScreen from "./screens/UserScreen";
 import Confirm from "./screens/Confirm";
+import Login from "./screens/Login";
+import Register from "./screens/Register";
 
 
 const StackNavigator = () => {
@@ -101,6 +103,8 @@ const StackNavigator = () => {
     <>
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login}  options={{headerShown:false}} />
+      <Stack.Screen name="Register" component={Register}  options={{headerShown:false}} />
         <Stack.Screen name="Main" component={BottomTab}  options={{headerShown:false}} />
         <Stack.Screen name="search" component={Search} options={{headerShown:false}} />
         <Stack.Screen name="places" component={Places}  />
